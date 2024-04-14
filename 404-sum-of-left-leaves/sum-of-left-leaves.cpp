@@ -16,11 +16,10 @@ public:
         if(root==NULL){
             return ;
         }
-        
-        solve(root->left,sum);
         if(root->left&&(root->left->left==NULL&&root->left->right==NULL)){
             sum +=root->left->val;
         }
+        solve(root->left,sum);
         solve(root->right,sum);
         
     }
