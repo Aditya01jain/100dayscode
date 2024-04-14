@@ -18,10 +18,11 @@ public:
         }
         
         solve(root->left,sum);
-        solve(root->right,sum);
         if(root->left&&(root->left->left==NULL&&root->left->right==NULL)){
             sum +=root->left->val;
         }
+        solve(root->right,sum);
+        
     }
     int sumOfLeftLeaves(TreeNode* root) {
         if(root==NULL){
