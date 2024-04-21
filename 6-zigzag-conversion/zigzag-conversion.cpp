@@ -5,6 +5,8 @@ class Solution {
         return s;
     }
     vector<string> rows(numRows, "");
+    
+    cout<<endl;
     int index = 0;
     bool goingDown = false;
     for (char c : s) {
@@ -18,6 +20,8 @@ class Solution {
     for (string row : rows) {
         result += row;
     }
+    
     return result;
+    
 }
 };
