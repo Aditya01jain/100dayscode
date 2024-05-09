@@ -4,7 +4,7 @@ class Solution {
     long long ans = 0;
     int decremented = 0;
 
-    ranges::sort(happiness, greater<>());
+    sort(happiness.begin(),happiness.end(),greater<int>());
 
     for (int i = 0; i < k; ++i) {
       ans += max(0, happiness[i] - decremented);
