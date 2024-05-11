@@ -3,7 +3,6 @@ class Solution {
   double mincostToHireWorkers(vector<int>& quality, vector<int>& wage, int k) {
     double ans = DBL_MAX;
     int qualitySum = 0;
-    // (wagePerQuality, quality) sorted by wagePerQuality
     vector<pair<double, int>> workers;
     priority_queue<int> maxHeap;
 
