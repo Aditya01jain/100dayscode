@@ -17,7 +17,7 @@ public:
     int trap(vector<int>& height) {
     int n = height.size();
     int ans = 0;
-    vector<int> left(n);  // l[i] := max(height[0..i])
+    vector<int> left(n);    
     vector<int> right(n);
     rightmax(height,right);
     leftmax(height,left);
