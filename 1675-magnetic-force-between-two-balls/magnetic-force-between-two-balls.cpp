@@ -1,31 +1,38 @@
 class Solution {
- public:
-  int maxDistance(vector<int>& position, int m) {
-    ranges::sort(position);
-
-    int l = 1;
-    int r = position.back() - position.front();
-
-    while (l < r) {
-      const int mid = r - (r - l) / 2;
-      if (numBalls(position, mid) >= m)  // There're too many balls.
-        l = mid;
-      else  // There're too few balls.
-        r = mid - 1;
+public:
+    bool check(vector<int>& p , int m, int dist) {
+        int n = p.size();
+        int count = 1; 
+        int last_position = p[0];
+        
+        for (int i = 1; i < n; ++i) {
+            if (p[i] - last_position >= dist) {
+                count++;
+                last_position = p[i];
+                if (count >= m) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
-
-    return l;
-  }
-
- private:
-  int numBalls(const vector<int>& position, int force) {
-    int balls = 0;
-    int prevPosition = -force;
-    for (const int pos : position)
-      if (pos - prevPosition >= force) {
-        ++balls;
-        prevPosition = pos;
-      }
-    return balls;
-  }
+    
+    int maxDistance(vector<int>& p, int m) {
+        sort(p.begin(), p.end());
+        int n = p.size();
+        int s = 1; 
+        int e = p[n-1] - p[0]; 
+        int ans = 0;
+        
+        while (s <= e) {
+            int mid = s + (e - s) / 2;
+            if (check(p, m, mid)) {
+                ans = mid;
+                s = mid + 1;
+            } else {
+                e = mid - 1;
+            }
+        }
+        return ans;
+    }
 };
