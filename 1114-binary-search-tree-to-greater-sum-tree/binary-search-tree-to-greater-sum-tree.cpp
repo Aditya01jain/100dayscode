@@ -16,9 +16,8 @@ public:
             return;
         }
         solve(root->right,ans);
-        int temp = root->val;
-            root->val += ans;
-            ans+=temp;
+        root->val += ans;
+        ans=root->val;
         solve(root->left,ans);
     }
     TreeNode* bstToGst(TreeNode* root) {
