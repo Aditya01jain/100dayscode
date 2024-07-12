@@ -10,11 +10,10 @@ public:
             return triangle[i][j];
 
     // Calculate the sum of two possible paths: going down and going diagonally
-        int down = triangle[i][j] + minimumPathSumUtil(i + 1, j, triangle, n, dp);
-        int diagonal = triangle[i][j] + minimumPathSumUtil(i + 1, j + 1, triangle, n, dp);
+        dp[i][j] = triangle[i][j] +min( minimumPathSumUtil(i + 1, j, triangle, n, dp),minimumPathSumUtil(i + 1, j + 1, triangle, n, dp));
 
     // Store the minimum of the two paths in the dp table and return it
-        return dp[i][j] = min(down, diagonal);
+        return dp[i][j] ;
     }
     int minimumTotal(vector<vector<int>>& triangle) {
         int n = triangle.size();
