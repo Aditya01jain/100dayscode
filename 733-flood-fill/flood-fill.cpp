@@ -25,7 +25,7 @@ public:
                 if (newX >= 0 && newX < n && newY >= 0 && newY < m && image[newX][newY] == val) {
                     ans[newX][newY] = color;
                     q.push({newX, newY});
-                    image[newX][newY] = color; // Mark it in the original image to avoid revisiting
+                    image[newX][newY] = color;
                 }
             }
         }
