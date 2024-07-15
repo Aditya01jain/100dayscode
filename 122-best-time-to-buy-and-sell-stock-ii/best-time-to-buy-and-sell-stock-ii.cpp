@@ -1,21 +1,20 @@
 class Solution {
 public:
-    int solve(vector<int>& prices,int i,bool buy,vector<vector<int>>& dp){
-        if(i==prices.size()){
-            return 0;
-        }
-        if (dp[i][buy] != -1) {
-            return dp[i][buy];
-        }
-        if(!buy){
-            return dp[i][buy] = max((-prices[i] + solve(prices,i+1,true,dp)),solve(prices,i+1,false,dp));
-        }
-        return dp[i][buy] = max((prices[i] + solve(prices,i+1,false,dp)),solve(prices,i+1,true,dp));
-    }
     int maxProfit(vector<int>& prices) {
-        bool buy = false;
         int n = prices.size();
-        vector<vector<int>> dp(n, vector<int>(2, -1));
-        return solve(prices,0,buy,dp);
+        vector<vector<int>> dp(n+1, vector<int>(2, 0));
+
+        for(int i = n - 1; i >= 0; i--) {
+            for(int j = 0; j <= 1; j++) {
+                if(j == 1) { // We have the option to buy
+                    dp[i][j] = max(-prices[i] + dp[i+1][0], dp[i+1][1]);
+                } else { // We have the option to sell
+                    dp[i][j] = max(prices[i] + dp[i+1][1], dp[i+1][0]);
+                }
+            }
+        }
+
+        // Start with the option to buy at day 0
+        return dp[0][1];
     }
 };
