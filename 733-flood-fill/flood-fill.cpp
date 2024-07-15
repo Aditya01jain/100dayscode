@@ -29,6 +29,7 @@ public:
                 }
             }
         }
-        return ans;
+        image[sr][sc]=color;
+        return image;
     }
 };
