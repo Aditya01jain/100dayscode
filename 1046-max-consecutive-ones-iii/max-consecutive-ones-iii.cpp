@@ -9,13 +9,15 @@ public:
             if(nums[j]==0){
                 z++;
             }
-            if(z>k){
-                while(z>k){
-                    if(nums[i]==0) z--;
-                    i++;
-                }
+            if(z<=k){
+                ans = max(ans,j-i+1);
             }
-            ans = max(ans,(j-i+1));
+            if(z>k){
+                if(nums[i]==0){
+                    z--;
+                }
+                i++;
+            }
             j++;
         }
         return ans;
