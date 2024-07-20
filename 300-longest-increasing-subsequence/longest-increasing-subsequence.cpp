@@ -1,23 +1,13 @@
 class Solution {
 public:
     int solve(vector<int>& nums, int prevIndex, int currentIndex, int n, vector<vector<int>>& dp) {
-        if (currentIndex == n) {
-            return 0;
-        }
-        
-        if (dp[prevIndex + 1][currentIndex] != -1) {
-            return dp[prevIndex + 1][currentIndex];
-        }
-        
+        if (currentIndex == n) return 0;
+        if (dp[prevIndex + 1][currentIndex] != -1) return dp[prevIndex + 1][currentIndex];
         int take = 0;
-        if (prevIndex == -1 || nums[currentIndex] > nums[prevIndex]) {
+        if (prevIndex == -1 || nums[currentIndex] > nums[prevIndex])
             take = 1 + solve(nums, currentIndex, currentIndex + 1, n, dp);
-        }
-        
         int dontTake = solve(nums, prevIndex, currentIndex + 1, n, dp);
-        
         dp[prevIndex + 1][currentIndex] = max(take, dontTake);
-        
         return dp[prevIndex + 1][currentIndex];
     }
 
