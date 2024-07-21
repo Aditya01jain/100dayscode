@@ -16,6 +16,7 @@ public:
         if(root->left) inorder(root->left,k,ans);
         k--;
         if(k==0) ans=root->val;
+        if(k<0) return;
         if(root->right) inorder(root->right,k,ans);
     }
     int kthSmallest(TreeNode* root, int k) {
