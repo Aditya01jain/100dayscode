@@ -11,24 +11,16 @@
  */
 class Solution {
 public:
-    void find(TreeNode* root, int k, priority_queue<int>& q){
-        if(root==NULL){
-            return;
-        }
-        find(root->left,k,q);
-        if(q.size()<k){
-            q.push(root->val);
-        }else{
-            if(root->val<q.top()){
-                q.pop();
-                q.push(root->val);
-            }
-        }
-        find(root->right,k,q);
+    void inorder(TreeNode* root,int& k,int & ans){
+        if(root==NULL) return;
+        if(root->left) inorder(root->left,k,ans);
+        k--;
+        if(k==0) ans=root->val;
+        if(root->right) inorder(root->right,k,ans);
     }
     int kthSmallest(TreeNode* root, int k) {
-        priority_queue<int> q;
-        find(root,k,q);
-        return q.top();
+        int ans =0;
+        inorder(root,k,ans);
+        return ans;
     }
 };
