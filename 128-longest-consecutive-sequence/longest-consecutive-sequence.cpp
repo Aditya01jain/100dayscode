@@ -1,31 +1,19 @@
-#include <vector>
-#include <set>
-using namespace std;
-
 class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
-        set<int> numSet(nums.begin(), nums.end()); // Use set constructor to directly insert elements
-        if (numSet.empty()) return 0; // Handle empty input
-        
-        int longestStreak = 0;
-        
-        for (int num : numSet) {
-            // Check if it's the start of a sequence
-            if (!numSet.count(num - 1)) {
-                int currentNum = num;
-                int currentStreak = 1;
-                
-                // Check the length of the current sequence
-                while (numSet.count(currentNum + 1)) {
-                    currentNum++;
-                    currentStreak++;
+        unordered_set<int> s(nums.begin(),nums.end());
+        int ans = 0;
+        for(int i:s){
+            if(!s.count(i-1)){
+                int cur = i;
+                int curs = 1;
+                while(s.count(cur+1)){
+                    cur = cur+1;
+                    curs++;
                 }
-                
-                longestStreak = max(longestStreak, currentStreak);
+                ans = max(ans,curs);
             }
         }
-        
-        return longestStreak;
+        return ans;
     }
 };
