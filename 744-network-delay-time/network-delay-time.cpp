@@ -28,7 +28,6 @@ public:
         for(auto i:ans) {
             if(i==-1) return -1;
             res = max(res,i);}
-        if(res==0)return -1;
         return res;
     }
 };
