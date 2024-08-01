@@ -24,7 +24,7 @@ public:
                 }
             }
         }
-        int res = INT_MIN;
+        int res = -1;
         for(auto i:ans) {
             if(i==-1) return -1;
             res = max(res,i);}
