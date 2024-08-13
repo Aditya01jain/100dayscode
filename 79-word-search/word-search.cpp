@@ -20,11 +20,10 @@ public:
     bool exist(vector<vector<char>>& board, string word) {
         int m = board.size();
         int n = board[0].size();
-        int index = 0;
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (board[i][j] == word[index]) {
-                    if (searchNext(board, word, i, j, index, m, n)) return true;
+                if (board[i][j] == word[0]) {
+                    if (searchNext(board, word, i, j,0, m, n)) return true;
                 }
             }
         }
