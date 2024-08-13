@@ -46,12 +46,11 @@ public:
     }
     vector<vector<string>> solveNQueens(int n) {
         vector<vector<string>> ans;
-        vector<string> board(n);
+        vector<string> board;
         string s(n, '.');
-        for (int i = 0; i < n; i++) {
-            board[i] = s;
-        }
-        solve(0, board, ans, n);
+        for (int i = 0; i < n; i++)
+            board.push_back(s);
+        solve(0, board, ans,n);
         return ans;
     }
 };
