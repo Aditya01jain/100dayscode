@@ -1,36 +1,34 @@
 class Solution {
 public:
     int countPaths(int n, vector<vector<int>>& roads) {
-        vector<pair<int, int>> adj[n];
-        for (auto it : roads) {
-            adj[it[0]].push_back({it[1], it[2]});
-            adj[it[1]].push_back({it[0], it[2]});
+        using ll = long long;
+        ll mod = 1e9 + 7;  // Correct mod value
+        unordered_map<int, set<pair<int, int>>> list;
+        for (auto& i : roads) {
+            list[i[0]].insert({i[1], i[2]});
+            list[i[1]].insert({i[0], i[2]});
         }
 
-        priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<pair<long long, int>>> pq;
-        vector<long long> dist(n, LLONG_MAX);
+        priority_queue<pair<ll, ll>, vector<pair<ll, ll>>, greater<pair<ll, ll>>> q;
+        vector<ll> dis(n, LLONG_MAX);
         vector<int> ways(n, 0);
-
-        dist[0] = 0;
+        dis[0] = 0;
         ways[0] = 1;
-        pq.push({0, 0});
-        int mod = (int)(1e9 + 7);
+        q.push({0, 0});
 
-        while (!pq.empty()) {
-            long long dis = pq.top().first;
-            int node = pq.top().second;
-            pq.pop();
+        while (!q.empty()) {
+            ll w = q.top().first;
+            int node = q.top().second;
+            q.pop();
 
-            for (auto it : adj[node]) {
-                int adjNode = it.first;
-                int edW = it.second;
-                if (dis + edW < dist[adjNode]) {
-                    dist[adjNode] = dis + edW;
-                    pq.push({dis + edW, adjNode});
-                    ways[adjNode] = ways[node];
-                }
-                else if (dis + edW == dist[adjNode]) {
-                    ways[adjNode] = (ways[adjNode] + ways[node]) % mod;
+            for (auto& i : list[node]) {
+                ll newDist = w + i.second;
+                if (dis[i.first] > newDist) {
+                    dis[i.first] = newDist;
+                    q.push({dis[i.first], i.first});
+                    ways[i.first] = ways[node];
+                } else if (dis[i.first] == newDist) {
+                    ways[i.first] = (ways[i.first] + ways[node]) % mod;
                 }
             }
         }
