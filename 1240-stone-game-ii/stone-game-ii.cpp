@@ -15,6 +15,6 @@ int stoneGameII(vector<int>& suffix, int i, int M, vector<vector<int>>& mem) {
         int opponent = suffix[i];
         for (int X = 1; X <= 2 * M; ++X)
             opponent = min(opponent, stoneGameII(suffix, i + X, max(M, X), mem));
-            return mem[i][M] = suffix[i] - opponent;
+        return mem[i][M] = suffix[i] - opponent;
     }
 };
