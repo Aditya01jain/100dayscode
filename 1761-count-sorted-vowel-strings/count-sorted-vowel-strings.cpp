@@ -1,27 +1,16 @@
 class Solution {
 public:
 
-    int solve(string str, int ind,vector<string>&m,int len, int n, 
-    vector<vector<int>>&dp)
-    {
-        if(len==n)
-        {
-            return 1;
-        }
-        if(ind==5)
-        {
-            return 0;
-        }
+    int solve(string str, int ind,vector<string>&m,int len, int n, vector<vector<int>>&dp){
+        if(len==n) return 1;
+        if(ind==5) return 0;
         if(dp[len][ind]!=-1) return dp[len][ind];
         int np = solve(str,ind+1,m,len,n,dp);
-
         int p = 0;
-        if(len<n)
-        {
+        if(len<n){
             str = str+m[ind];
             p = solve(str,ind,m,len+1,n,dp);
         }
-        
         return dp[len][ind] = np+p;
     }
     int countVowelStrings(int n) {
