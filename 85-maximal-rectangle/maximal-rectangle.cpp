@@ -1,37 +1,34 @@
 class Solution {
- public:
-  int maximalRectangle(vector<vector<char>>& matrix) {
-    if (matrix.empty())
-      return 0;
-
-    int ans = 0;
-    vector<int> hist(matrix[0].size());
-
-    for (const vector<char>& row : matrix) {
-      for (int i = 0; i < row.size(); ++i)
-        hist[i] = row[i] == '0' ? 0 : hist[i] + 1;
-      ans = max(ans, largestRectangleArea(hist));
+public:
+int solve(vector<int> h){
+        stack<int> s;
+        int maxA =0;
+        int n = h.size();
+        for(int i=0;i<=n;i++){
+            while(!s.empty() &&(i==n || h[s.top()]>=h[i])){
+                int hig = h[s.top()];
+                s.pop();
+                int wid;
+                if(s.empty()) wid = i;
+                else wid = i - s.top() - 1;
+                maxA = max(maxA,hig*wid);
+            }
+            s.push(i);
+        }
+        return maxA;
     }
-
-    return ans;
-  }
-
- private:
-  int largestRectangleArea(const vector<int>& heights) {
-    int ans = 0;
-    stack<int> stack;
-
-    for (int i = 0; i <= heights.size(); ++i) {
-      while (!stack.empty() &&
-             (i == heights.size() || heights[stack.top()] > heights[i])) {
-        const int h = heights[stack.top()];
-        stack.pop();
-        const int w = stack.empty() ? i : i - stack.top() - 1;
-        ans = max(ans, h * w);
-      }
-      stack.push(i);
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        int ans = 0;
+        int n = matrix.size();
+        int m = matrix[0].size();
+        vector<int> h(m,0);
+        for(int i=0;i<matrix.size();i++){
+            for(int j=0;j<matrix[0].size();j++){
+                if(matrix[i][j]=='1') h[j]++;
+                else h[j]=0;
+            }
+            ans =max(ans,solve(h));
+        }
+        return ans;
     }
-
-    return ans;
-  }
 };
